@@ -1,12 +1,14 @@
 import './index.css'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {Redirect} from 'react-router-dom'
 
 class LoginForm extends Component {
   state = {
     userId: '',
     pin: '',
     onSubmitError: false,
+    errorMsg: '',
   }
 
   onSuccess = jwtToken => {
@@ -15,9 +17,10 @@ class LoginForm extends Component {
     history.replace('/')
   }
 
-  onFailure = () => {
+  onFailure = errorMsg => {
     this.setState({
       onSubmitError: true,
+      errorMsg,
     })
   }
 
@@ -53,7 +56,12 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {userId, pin, onSubmitError} = this.state
+    const {userId, pin, onSubmitError, errorMsg} = this.state
+
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="login-container">
         <div className="card-container">
@@ -93,6 +101,7 @@ class LoginForm extends Component {
               <button type="submit" className="button">
                 Login
               </button>
+              {onSubmitError ? <p className="errMsg">{errorMsg}</p> : ''}
             </form>
           </div>
         </div>

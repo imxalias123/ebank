@@ -1,0 +1,18 @@
+.home-container {
+  background-color: #152850;
+  padding: 40px;
+  height: 100vh;
+}
+.home-h1 {
+  color: #fff;
+  font-size: 30px;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.card {
+}

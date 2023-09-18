@@ -25,7 +25,8 @@ class LoginForm extends Component {
     event.preventDefault()
 
     const {userId, pin} = this.state
-    const userDetails = {userId, pin}
+    console.log(userId, pin)
+    const userDetails = {user_Id: userId, pin}
     const apiUrl = 'https://apis.ccbp.in/ebank/login'
     const options = {
       method: 'POST',
